@@ -1,13 +1,13 @@
 package org.example.test;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.google.gson.Gson;
+
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 
 public class Converter {
 
     public Converter(Categories value) throws FileNotFoundException {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(new FileOutputStream(String.valueOf(value)));
+        String json = new Gson().toJson(value);
+        System.out.println(json);
     }
 }

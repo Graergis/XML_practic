@@ -9,11 +9,10 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.transform.stream.StreamSource;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class JaxbParser {
 
-    public JaxbParser() throws XMLStreamException, JAXBException, FileNotFoundException {
+    public JaxbParser(String numder) throws XMLStreamException, JAXBException, FileNotFoundException {
         XMLInputFactory xif = XMLInputFactory.newFactory();
         StreamSource xml = new StreamSource("test.xml");
         XMLStreamReader xsr = xif.createXMLStreamReader(xml);
@@ -22,11 +21,7 @@ public class JaxbParser {
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         JAXBElement<Categories> jb = unmarshaller.unmarshal(xsr, Categories.class);
         xsr.close();
-        Scanner scanner = new Scanner(System.in);
-
         Categories categories = jb.getValue();
-        System.out.println("1 - вывод результата парсинга. 2 - конвертировать в json.");
-        String numder = scanner.nextLine();
         if (numder.equals("2")) {
             Converter converter = new Converter(jb.getValue());
         }
